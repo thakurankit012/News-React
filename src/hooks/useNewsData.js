@@ -10,7 +10,7 @@ const useNewsData = (category, searchTerm) => {
       try {
         setLoading(true);
 
-        const apiKey = process.env.REACT_APP_GNEWS_API_KEY;
+        const apiKey = process.env.d00e99647dbafb5288f1423fa56d7168;
         const apiUrl = `https://gnews.io/api/v4/top-headlines?token=d00e99647dbafb5288f1423fa56d7168`;
         const categoryParam = category ? `&topic=${category}` : "";
         const searchParam = searchTerm ? `&q=${searchTerm}` : "";
