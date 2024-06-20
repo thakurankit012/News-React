@@ -1,10 +1,12 @@
-import { useState } from "react";
+  import { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css"; // Import CSS for skeleton
+
 import useNewsData from "../hooks/useNewsData";
 import CustomPagination from "./CustomPagination";
 
-const NewsList = (props) => {
-  const { category, searchTerm, darkMode } = props; // Receive darkMode from props
+const NewsList = ({ category, searchTerm, darkMode }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 4;
 
@@ -13,23 +15,38 @@ const NewsList = (props) => {
   const { newsData, loading, error } = useNewsData(category, searchTerm);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Container>
+        <Row>
+          {[...Array(4)].map((_, index) => (
+            <Col xl={16} md={5} lg={7} key={index}>
+              <Card className="mb-4">
+                <Skeleton height={200} />
+                <Card.Body>
+                  <Skeleton count={3} />
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    );
   }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
-  const totalArticles = newsData.length;
+  const totalArticles = newsData?.length || 0;
   const totalPages = Math.ceil(totalArticles / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const currentArticles = newsData.slice(startIndex, endIndex);
+  const currentArticles = newsData?.slice(startIndex, endIndex) || [];
 
   return (
     <Container>
       <Row>
-        {currentArticles?.map((article) => (
+        {currentArticles.map((article) => (
           <Col xl={16} md={5} lg={7} key={article.url}>
             <Card
               className="mb-4"
