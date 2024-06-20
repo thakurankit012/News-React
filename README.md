@@ -1,1 +1,1 @@
-https://havelnews.netlify.app/
+https://havelnews0.netlify.app/
