@@ -1,0 +1,42 @@
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    z-index: 9999;
+  }
+  
+  .loading-screen h1 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: bold; /* Make text bold */
+    font-family: 'Arial', sans-serif; /* Example of using a different font */
+    overflow: hidden; /* Hide overflow */
+    white-space: nowrap; /* Prevent text from wrapping */
+    animation: typing 2s steps(20, end), blink-caret 0.5s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blink-caret {
+    from,
+    to {
+      border-right-color: transparent;
+    }
+    50% {
+      border-right-color: #333; /* Color of cursor */
+    }
+  }
+  
